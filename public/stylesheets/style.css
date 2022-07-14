@@ -1,8 +1,57 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	margin: 0px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	font-family: Roboto, sans-serif;
+	min-height: 100vh;
 }
 
-a {
-  color: #00B7FF;
+nav {
+	display: flex;
+	justify-content: space-between;
+	margin: 10px;
+	border-bottom: 2px solid black;
+}
+
+.siteName {
+	margin: 0;
+}
+
+.pageTitle {
+	margin: 5px 0 0 0;
+}
+
+.nav-right {
+	display: flex;
+	flex-direction: row;
+	align-content: space-between;
+	gap: 5px;
+}
+
+.nav-link,
+.nav-link:visited,
+.nav-link:active {
+	color: inherit;
+	text-decoration: none;
+}
+
+.nav-link:hover {
+	font-weight: bold;
+}
+
+main {
+	margin: 0 10px 0 10px;
+}
+
+footer {
+	display: flex;
+	border-top: 2px solid black;
+	padding: 2px;
+	margin: 10px;
+}
+
+.footer-left {
+	display: flex;
+	gap: 10px;
 }
