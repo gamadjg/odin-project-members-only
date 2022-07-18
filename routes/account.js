@@ -17,9 +17,24 @@ router.get("/sign-up", function (req, res) {
 router.post("/sign-up", function (req, res) {
 	try {
 		userController.createUser(req, res);
-	} catch (err) {
-		console.log(err);
+	} catch (error) {
+		console.log(error);
 	}
 });
 
+router.post("/login", (req, res) => {
+	try {
+		userController.login(req, res);
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+router.get("logout", (req, res) => {
+	try {
+		userController.login(res, res);
+	} catch (error) {
+		console.log(error);
+	}
+});
 module.exports = router;

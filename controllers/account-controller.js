@@ -32,6 +32,24 @@ const createUser = (req, res) => {
 	});
 };
 
+const login = (req, res) => {
+	passport.authenticate("local", {
+		successRedirect: "/",
+		failureRedirect: "/",
+	});
+};
+
+const logout = (req, res) => {
+	req.logout((err) => {
+		if (err) {
+			return next(err);
+		}
+		res.redirect("/");
+	});
+};
+
 module.exports = {
 	createUser,
+	login,
+	logout,
 };

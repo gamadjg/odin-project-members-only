@@ -26,6 +26,16 @@ const accountRouter = require("./routes/account");
 app.set("views", "./views");
 app.set("view engine", "ejs");
 
+// Application config
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
+
+// password encryption setup
+app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 // Database connection
 mongoose
 	.connect(dburi)
@@ -49,18 +59,6 @@ mongoose
 	.catch((err) => {
 		console.log(err);
 	});
-
-//const Users = require("../models/account-schema");
-
-// Application config
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-
-// password encryption setup
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 
 passport.use(
 	new LocalStrategy((email, password, done) => {
