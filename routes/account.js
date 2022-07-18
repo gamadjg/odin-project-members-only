@@ -16,7 +16,6 @@ router.get("/sign-up", function (req, res) {
 
 router.post("/sign-up", function (req, res) {
 	try {
-		//console.log("t1");
 		userController.createUser(req, res);
 	} catch (err) {
 		console.log(err);
