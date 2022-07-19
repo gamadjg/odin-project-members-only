@@ -1,38 +1,51 @@
 const express = require("express");
 const router = express.Router();
-const userController = require("../controllers/account-controller");
+const accountController = require("../controllers/account-controller");
 
 router.get("/", function (req, res) {
-	res.render("index", { title: "User Account", page: "account-user" });
+	res.render("index", {
+		title: "User Account",
+		page: "account-user",
+		user: req.user,
+	});
 });
 
-router.get("/login", function (req, res) {
-	res.render("index", { title: "Account Login", page: "account-login" });
+router.get("/log-in", function (req, res) {
+	res.render("index", {
+		title: "Account Login",
+		page: "account-log-in",
+		user: req.user,
+	});
+});
+
+router.post("/log-in", (req, res) => {
+	try {
+		console.log("Calling login module");
+		accountController.login(req, res);
+	} catch (error) {
+		console.log(error);
+	}
 });
 
 router.get("/sign-up", function (req, res) {
-	res.render("index", { title: "Account Sign Up", page: "account-sign-up" });
+	res.render("index", {
+		title: "Account Sign Up",
+		page: "account-sign-up",
+		user: req.user,
+	});
 });
 
 router.post("/sign-up", function (req, res) {
 	try {
-		userController.createUser(req, res);
+		accountController.createUser(req, res);
 	} catch (error) {
 		console.log(error);
 	}
 });
 
-router.post("/login", (req, res) => {
+router.get("/log-out", (req, res) => {
 	try {
-		userController.login(req, res);
-	} catch (error) {
-		console.log(error);
-	}
-});
-
-router.get("logout", (req, res) => {
-	try {
-		userController.login(res, res);
+		accountController.logout(res, res);
 	} catch (error) {
 		console.log(error);
 	}

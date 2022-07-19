@@ -1,46 +1,45 @@
 const Users = require("../models/account-schema");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 const createUser = (req, res) => {
 	//console.log(`User email: ${req.body.email}`);
-	Users.findOne({ email: req.body.email }, (err, usr) => {
+	Users.findOne({ email: req.body.email }, (err, user) => {
 		if (err) {
 			console.log(err);
 		}
-		if (!usr) {
+		if (!user) {
 			console.log("Creating user.");
 			bcrypt.hash(req.body.password, 10, (err, hashedPwd) => {
-				const user = new Users({
+				const newUser = new Users({
 					name: req.body.name,
-					email: req.body.email,
+					username: req.body.email,
 					password: hashedPwd,
 				});
-				user
+				newUser
 					.save()
 					.then((result) => {
-						res.redirect("/account/sign-up");
+						res.redirect("/");
 					})
 					.catch((err) => {
 						console.log(err);
 					});
 			});
 		}
-		if (usr) {
+		if (user) {
 			console.log("user already exists");
 			res.redirect("/account/sign-up");
 		}
 	});
 };
 
-const login = (req, res) => {
-	passport.authenticate("local", {
-		successRedirect: "/",
-		failureRedirect: "/",
-	});
-};
+const login = passport.authenticate("local", {
+	successRedirect: "/",
+	failureRedirect: "/account/log-in",
+});
 
 const logout = (req, res) => {
-	req.logout((err) => {
+	req.logout(function (err) {
 		if (err) {
 			return next(err);
 		}

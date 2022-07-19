@@ -6,21 +6,22 @@ const session = require("express-session");
 const app = express();
 
 // Password encrytpion imports
-const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const passport = require("passport");
+//const authenticator = require("./middleware/authenticator");
 const bcrypt = require("bcryptjs");
 
-// Database imports
+// Database
 const mongoose = require("mongoose");
 const dburi = process.env.DBURI;
 const port = process.env.PORT;
+const Users = require("./models/account-schema");
 
 // Routing
 const createError = require("http-errors");
 const indexRouter = require("./routes/index");
 const accountRouter = require("./routes/account");
-//const usersRouter = require("./routes/users");
-//const messagesRouter = require("./routes/messages");
+//const postsRouter = require("./routes/posts");
 
 // view engine setup
 app.set("views", "./views");
@@ -28,7 +29,7 @@ app.set("view engine", "ejs");
 
 // Application config
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
 // password encryption setup
@@ -43,37 +44,32 @@ mongoose
 		// we are only listening for requests until after the conneciton to the db is established.
 		console.log("ready");
 		app.listen(port);
-
-		// List all collections in database
-		// mongoose.connection.db.listCollections().toArray(function (err, names) {
-		// 	if (err) {
-		// 		console.log(err);
-		// 	} else {
-		// 		names.forEach(function (e, i, a) {
-		// 			//mongoose.connection.db.dropCollection(e.name);
-		// 			console.log("--->>", e.name);
-		// 		});
-		// 	}
-		// });
 	})
 	.catch((err) => {
 		console.log(err);
 	});
 
 passport.use(
-	new LocalStrategy((email, password, done) => {
-		User.findOne({ email: email }, (err, user) => {
+	new LocalStrategy((username, password, done) => {
+		console.log(username);
+		console.log(password);
+
+		Users.findOne({ username: username }, (err, user) => {
 			if (err) {
+				console.log(err);
 				return done(err);
 			}
 			if (!user) {
+				console.log(err);
 				return done(null, false, { message: "Incorrect username" });
 			}
 			bcrypt.compare(password, user.password, (err, res) => {
 				if (res) {
+					console.log("Successful login. Returning user account.");
 					return done(null, user);
 				} else {
 					// passwords do not match!
+					console.log("Incorrect password.");
 					return done(null, false, { message: "Incorrect password" });
 				}
 			});
@@ -81,23 +77,17 @@ passport.use(
 	})
 );
 
-passport.serializeUser(function (user, done) {
-	done(null, user.id);
-});
+passport.serializeUser((user, done) => done(null, user.id));
 
-passport.deserializeUser(function (id, done) {
-	User.findById(id, function (err, user) {
-		done(err, user);
-	});
-});
-
-app.use(passport.initialize());
+passport.deserializeUser((id, done) =>
+	Users.findById(id, (err, user) => done(err, user))
+);
 
 app.use("/", indexRouter);
 app.use("/account", accountRouter);
 
 //app.use("/users", usersRouter);
-//app.use("/messages", messagesRouter);
+//app.use("/posts", postsRouter);
 
 // default 404 page
 app.use((req, res) => {
