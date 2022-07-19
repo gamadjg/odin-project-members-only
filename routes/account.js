@@ -45,7 +45,7 @@ router.post("/sign-up", function (req, res) {
 
 router.get("/log-out", (req, res) => {
 	try {
-		accountController.logout(res, res);
+		accountController.logout(req, res);
 	} catch (error) {
 		console.log(error);
 	}
