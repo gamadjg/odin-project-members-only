@@ -19,9 +19,9 @@ const Users = require("./models/account-schema");
 
 // Routing
 const createError = require("http-errors");
-const indexRouter = require("./routes/index");
-const accountRouter = require("./routes/account");
-const postsRouter = require("./routes/posts");
+const indexRouter = require("./routes/index-router");
+const accountRouter = require("./routes/accounts-router");
+const postsRouter = require("./routes/posts-router");
 
 // view engine setup
 app.set("views", "./views");

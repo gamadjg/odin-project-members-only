@@ -1,12 +1,10 @@
 <div id="postsMain">
-	<% if(user){ %>
 	<div id="createPostContainer"><%- include("./posts-create.ejs") %></div>
-	<% } %>
 	<div id="postsContainer">
-		<% if(postsList.length > 0){postsList.forEach(post => {%>
+		<% if(posts.length > 0){posts.forEach(post => {%>
 		<div class="post">
-			<h5 class="postTitle"><%= post.postTitle %></h5>
-			<p class="postBody"><%= post.postBody %></p>
+			<h5 class="postTitle"><%= post.title %></h5>
+			<p class="postBody"><%= post.body %></p>
 		</div>
 		<% })} else { %>
 		<p>no posts available</p>

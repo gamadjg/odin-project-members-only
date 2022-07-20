@@ -1,25 +1,18 @@
 const Posts = require("../models/posts-schema");
 
 const postsIndex = (req, res) => {
-	// messageType will be either the user id or 'all'
-	const postsLocation = req.params.postType;
-	const userId = req.params.userId;
-	switch (postsLocation) {
-		case "all":
-			Posts.find().then((result) => {
-				res.render("posts", { title: "Posts", postsList: result });
-			});
-			break;
-		case "user":
-			Posts.findOne({ _id: { $eq: "userId" } }).then((result) => {
-				res.render("my-posts", { title: "My Posts", postsList: result });
-			});
-			break;
-		default:
-			res.render("posts", { title: "Posts", postsList: [] });
-			break;
-	}
+	Posts.find().then((result) => {
+		console.log(result);
+		res.render("index", {
+			title: "All Posts",
+			page: "posts",
+			user: req.user,
+			postsList: result,
+		});
+	});
 };
+
+const getUserPosts = (req, res) => {};
 
 const createPost = (req, res) => {
 	const post = new Post({
@@ -66,6 +59,7 @@ const deletePost = (req, res) => {
 
 module.exports = {
 	postsIndex,
+	getUserPosts,
 	createPost,
 	deletePost,
 };

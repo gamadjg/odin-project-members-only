@@ -3,25 +3,21 @@ const Schema = mongoose.Schema;
 
 const cardsSchema = new Schema(
 	{
-		card_name: {
+		postTitle: {
 			type: String,
 			required: true,
 		},
-		card_description: {
+		postBody: {
 			type: String,
 			required: true,
 		},
-		card_set: {
-			type: String,
-			required: false,
-		},
-		card_type: {
+		userID: {
 			type: String,
 			required: true,
 		},
-		card_img_name: {
+		userDisplayName: {
 			type: String,
-			required: false,
+			required: true,
 		},
 	},
 	{ timestampes: true }
