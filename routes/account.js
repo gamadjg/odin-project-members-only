@@ -1,8 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const accountController = require("../controllers/account-controller");
+const postsController = require("../controllers/posts-controller");
 
 router.get("/", function (req, res) {
+	//myPosts = postsController.postsIndex(req.user);
+
 	res.render("index", {
 		title: "User Account",
 		page: "account-user",

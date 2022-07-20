@@ -10,8 +10,22 @@ body {
 nav {
 	display: flex;
 	justify-content: space-between;
-	margin: 10px;
+	margin: 10px 10px;
 	border-bottom: 2px solid black;
+	height: 56px;
+}
+
+/* img {
+	margin: 5px;
+} */
+
+p {
+	margin: 5px;
+}
+
+.accountIcon {
+	max-width: 50px;
+	max-height: 50px;
 }
 
 .siteName {
@@ -22,11 +36,28 @@ nav {
 	margin: 5px 0 0 0;
 }
 
-.nav-right {
+nav > * {
 	display: flex;
 	flex-direction: row;
 	align-content: space-between;
-	gap: 5px;
+	/* gap: 5px; */
+}
+
+.nav-left > * {
+	flex: auto;
+	align-self: center;
+	padding: 0 5px;
+}
+
+.nav-right > * {
+	flex: auto;
+	align-self: center;
+	padding: 0 5px;
+}
+
+#iconPlaceHolder {
+	width: 50px;
+	height: 50px;
 }
 
 .nav-link,
@@ -44,14 +75,52 @@ main {
 	margin: 0 10px 0 10px;
 }
 
+#logInMain {
+	display: flex;
+	flex-direction: column;
+}
+
+#logInMain > * {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	justify-self: center;
+	gap: 5px;
+}
+
+#signUpMain {
+	display: flex;
+	flex-direction: column;
+}
+
+#signUpMain > * {
+	display: flex;
+	flex-direction: column;
+	align-self: center;
+	justify-self: center;
+	gap: 5px;
+}
+
+button {
+	flex: auto;
+	align-self: center;
+	max-width: 50%;
+}
+
 footer {
 	display: flex;
 	border-top: 2px solid black;
 	padding: 2px;
 	margin: 10px;
+	justify-content: space-between;
 }
 
 .footer-left {
+	/* margin-top: 5px; */
 	display: flex;
 	gap: 10px;
+}
+
+.footer-right {
+	/* margin-top: 5px; */
 }
