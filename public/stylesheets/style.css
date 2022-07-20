@@ -47,12 +47,14 @@ nav > * {
 	flex: auto;
 	align-self: center;
 	padding: 0 5px;
+	margin-bottom: 10px;
 }
 
 .nav-right > * {
 	flex: auto;
 	align-self: center;
 	padding: 0 5px;
+	margin-bottom: 10px;
 }
 
 #iconPlaceHolder {

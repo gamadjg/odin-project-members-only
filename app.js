@@ -21,7 +21,7 @@ const Users = require("./models/account-schema");
 const createError = require("http-errors");
 const indexRouter = require("./routes/index");
 const accountRouter = require("./routes/account");
-//const postsRouter = require("./routes/posts");
+const postsRouter = require("./routes/posts");
 
 // view engine setup
 app.set("views", "./views");
@@ -36,6 +36,11 @@ app.use(express.static("public"));
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Routing config
+app.use("/", indexRouter);
+app.use("/account", accountRouter);
+app.use("/posts", postsRouter);
 
 // Database connection
 mongoose
@@ -83,17 +88,9 @@ passport.deserializeUser((id, done) =>
 	Users.findById(id, (err, user) => done(err, user))
 );
 
-app.use("/", indexRouter);
-app.use("/account", accountRouter);
-
-//app.use("/users", usersRouter);
-//app.use("/posts", postsRouter);
-
 // default 404 page
 app.use((req, res) => {
 	res.render("error", { title: "ERROR" });
 });
-
-//app.listen(port);
 
 module.exports = app;

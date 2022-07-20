@@ -5,11 +5,15 @@ const postsController = require("../controllers/posts-controller");
 
 router.get("/", function (req, res) {
 	//myPosts = postsController.postsIndex(req.user);
-
+	const result = {
+		title: "a post",
+		body: "post body",
+	};
 	res.render("index", {
 		title: "User Account",
 		page: "account-user",
 		user: req.user,
+		posts: result,
 	});
 });
 
