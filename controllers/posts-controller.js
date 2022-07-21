@@ -2,7 +2,7 @@ const Posts = require("../models/posts-schema");
 
 const postsIndex = (req, res) => {
 	Posts.find().then((result) => {
-		console.log(result);
+		//console.log(result);
 		res.render("index", {
 			title: "All Posts",
 			page: "posts",
@@ -12,13 +12,24 @@ const postsIndex = (req, res) => {
 	});
 };
 
-const getUserPosts = (req, res) => {};
+const getUserPosts = (req, res) => {
+	//console.log(req.user._id.toString());
+	userId = req.user._id.toString();
+	Posts.find({ userId: { $eq: userId } }).then((result) => {
+		res.render("index", {
+			title: "User Posts",
+			page: "posts",
+			user: req.user,
+			postsList: result,
+		});
+	});
+};
 
 const createPost = (req, res) => {
 	const post = new Post({
-		post_title: req.body.postTitle,
-		post_body: req.body.postBody,
-		post_user: req.body.postUser,
+		postTitle: req.body.postTitle,
+		postBody: req.body.postBody,
+		userId: req.body.postUser,
 	});
 	post
 		.save()

@@ -3,25 +3,11 @@ const router = express.Router();
 const postsController = require("../controllers/posts-controller");
 
 router.get("/user-posts", function (req, res) {
-	let result = [
-		{
-			title: "a post",
-			body: "post body",
-		},
-	];
-
 	try {
-		result = postsController.postsIndex();
+		postsController.getUserPosts(req, res);
 	} catch (error) {
 		console.log(error);
 	}
-
-	res.render("index", {
-		title: "User Posts",
-		page: "posts-user",
-		user: req.user,
-		posts: result,
-	});
 });
 
 router.post("/create", (req, res) => {
