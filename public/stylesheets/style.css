@@ -77,25 +77,12 @@ main {
 	margin: 0 10px 0 10px;
 }
 
-#logInMain {
+.formMain {
 	display: flex;
 	flex-direction: column;
 }
 
-#logInMain > * {
-	display: flex;
-	flex-direction: column;
-	align-self: center;
-	justify-self: center;
-	gap: 5px;
-}
-
-#signUpMain {
-	display: flex;
-	flex-direction: column;
-}
-
-#signUpMain > * {
+.formMain > * {
 	display: flex;
 	flex-direction: column;
 	align-self: center;

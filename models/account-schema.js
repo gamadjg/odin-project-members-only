@@ -15,6 +15,10 @@ const userSchema = new Schema(
 			type: String,
 			required: true,
 		},
+		accountType: {
+			type: String,
+			required: true,
+		},
 	},
 	{ timestampes: true }
 );

@@ -3,7 +3,7 @@ const router = express.Router();
 const accountController = require("../controllers/account-controller");
 const postsController = require("../controllers/posts-controller");
 
-router.get("/", function (req, res) {
+router.get("/", (req, res) => {
 	res.render("index", {
 		title: "User Account",
 		page: "account-user",
@@ -28,7 +28,7 @@ router.post("/log-in", (req, res) => {
 	}
 });
 
-router.get("/sign-up", function (req, res) {
+router.get("/sign-up", (req, res) => {
 	res.render("index", {
 		title: "Account Sign Up",
 		page: "account-sign-up",
@@ -36,9 +36,25 @@ router.get("/sign-up", function (req, res) {
 	});
 });
 
-router.post("/sign-up", function (req, res) {
+router.post("/sign-up", (req, res) => {
 	try {
 		accountController.createUser(req, res);
+	} catch (error) {
+		console.log(error);
+	}
+});
+
+router.get("/update-account-type", (req, res) => {
+	res.render("index", {
+		title: "Update Membership Form",
+		page: "account-membership-update",
+		user: req.user,
+	});
+});
+
+router.post("/update-account-type", (req, res) => {
+	try {
+		accountController.updateAccountType(req, res);
 	} catch (error) {
 		console.log(error);
 	}

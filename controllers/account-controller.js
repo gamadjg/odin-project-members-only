@@ -15,6 +15,7 @@ const createUser = (req, res) => {
 					name: req.body.name,
 					username: req.body.email,
 					password: hashedPwd,
+					accountType: "user",
 				});
 				newUser
 					.save()
