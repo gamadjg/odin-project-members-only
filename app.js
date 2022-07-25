@@ -56,8 +56,8 @@ mongoose
 
 passport.use(
 	new LocalStrategy((username, password, done) => {
-		console.log(username);
-		console.log(password);
+		//console.log(username);
+		//console.log(password);
 
 		Users.findOne({ username: username }, (err, user) => {
 			if (err) {

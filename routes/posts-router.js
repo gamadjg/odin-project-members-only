@@ -12,8 +12,7 @@ router.get("/user-posts", function (req, res) {
 
 router.post("/create", (req, res) => {
 	try {
-		console.log("Creating post");
-		//postsController.login(req, res);
+		postsController.createPost(req, res);
 	} catch (error) {
 		console.log(error);
 	}

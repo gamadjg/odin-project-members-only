@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const cardsSchema = new Schema(
+const postsSchema = new Schema(
 	{
 		postTitle: {
 			type: String,
@@ -23,6 +23,6 @@ const cardsSchema = new Schema(
 	{ timestampes: true }
 );
 
-const cardsModel = mongoose.model("cards", cardsSchema);
+const postsModel = mongoose.model("posts", postsSchema);
 
-module.exports = cardsModel;
+module.exports = postsModel;

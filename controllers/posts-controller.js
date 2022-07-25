@@ -26,10 +26,13 @@ const getUserPosts = (req, res) => {
 };
 
 const createPost = (req, res) => {
-	const post = new Post({
+	console.log("Creating post");
+	//console.log(req.user);
+	const post = new Posts({
 		postTitle: req.body.postTitle,
 		postBody: req.body.postBody,
-		userId: req.body.postUser,
+		userId: req.user._id.toString(),
+		userDisplayName: req.user.userDisplayName,
 	});
 	post
 		.save()

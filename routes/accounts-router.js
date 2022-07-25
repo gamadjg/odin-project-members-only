@@ -21,7 +21,7 @@ router.get("/log-in", function (req, res) {
 
 router.post("/log-in", (req, res) => {
 	try {
-		console.log("Calling login module");
+		//console.log("Calling login module");
 		accountController.login(req, res);
 	} catch (error) {
 		console.log(error);
