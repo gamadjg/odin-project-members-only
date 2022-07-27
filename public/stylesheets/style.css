@@ -43,6 +43,12 @@ nav > * {
 	/* gap: 5px; */
 }
 
+.trash {
+	font-size: 20px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
 .nav-left > * {
 	flex: auto;
 	align-self: center;
@@ -108,8 +114,4 @@ footer {
 	/* margin-top: 5px; */
 	display: flex;
 	gap: 10px;
-}
-
-.footer-right {
-	/* margin-top: 5px; */
 }

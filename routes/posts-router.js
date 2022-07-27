@@ -18,4 +18,12 @@ router.post("/create", (req, res) => {
 	}
 });
 
+router.delete("/delete/:page/:id", (req, res) => {
+	try {
+		postsController.deletePost(req, res);
+	} catch (error) {
+		console.log(error);
+	}
+});
+
 module.exports = router;

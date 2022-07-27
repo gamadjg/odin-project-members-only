@@ -12,7 +12,10 @@
 					"Anonymous"%>
 				</h4>
 				<% }else{ %> <%if(user.accountType === "admin") { %>
-				<h4 class="trashCan">trashIcon</h4>
+				<i
+					data-doc="<%= post._id.toString() %>"
+					class="trash fa-solid fa-trash-can"
+				></i>
 				<% } %>
 				<h4 class="postAuthor"><%= post.userDisplayName %></h4>
 				<% } %>
@@ -39,3 +42,17 @@
 	</div>
 	<% } %>
 </div>
+<script>
+	const posts = document.querySelectorAll("i.trash");
+	posts.forEach((element) => {
+		element.addEventListener("click", (event) => {
+			console.log("trashcan clicked");
+			const endpoint = `/posts/delete/${document.title}/${element.dataset.doc}`;
+
+			fetch(endpoint, { method: "DELETE" })
+				.then((response) => response.json())
+				.then((data) => (window.location.href = data.redirect))
+				.catch((error) => console.log(error));
+		});
+	});
+</script>

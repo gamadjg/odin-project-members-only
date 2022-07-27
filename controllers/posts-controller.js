@@ -46,23 +46,29 @@ const createPost = (req, res) => {
 
 const deletePost = (req, res) => {
 	const postId = req.params.id;
-	const delSource = req.params.source;
+	const delSource = req.params.page;
+	console.log(delSource);
 
 	Posts.findByIdAndDelete(postId)
 		.then(() => {
 			switch (delSource) {
-				case "all":
-					Posts.find().then((result) => {
-						res.render("posts", { title: "Posts", postsList: result });
-					});
+				case "All Posts Page":
+					res.json({ redirect: "/" });
+					// res.render("posts", { title: "Posts", postsList: [] });
+					// Posts.find().then((result) => {
+					// 	res.render("posts", { title: "Posts", postsList: result });
+					// });
 					break;
-				case "user":
-					Posts.find({ card_type: { $eq: "regular" } }).then((result) => {
-						res.render("my-posts", { title: "My Posts", postsList: result });
-					});
+				case "User Posts Page":
+					res.json({ redirect: "/posts/user-posts" });
+					//res.render("posts", { title: "Posts", postsList: [] });
+					// Posts.find({ card_type: { $eq: "regular" } }).then((result) => {
+					// 	res.render("my-posts", { title: "My Posts", postsList: result });
+					// });
 					break;
 				default:
-					res.render("posts", { title: "Posts", postsList: [] });
+					res.json({ redirect: "/" });
+					//res.render("posts", { title: "Posts", postsList: [] });
 					break;
 			}
 		})
