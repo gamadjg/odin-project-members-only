@@ -1,4 +1,7 @@
+// Env
 require("dotenv").config();
+const dburi = process.env.DBURI;
+const port = process.env.PORT;
 
 // Express imports
 const express = require("express");
@@ -13,8 +16,6 @@ const bcrypt = require("bcryptjs");
 
 // Database
 const mongoose = require("mongoose");
-const dburi = process.env.DBURI;
-const port = process.env.PORT;
 const Users = require("./models/account-schema");
 
 // Routing

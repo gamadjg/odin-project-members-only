@@ -1,16 +1,20 @@
 <div class="formMain">
 	<form action="/account/update-account-type" method="POST">
 		<div>
-			<label for="membershipType">Update account to:</label>
-			<input type="radio" name="membershipAdmin" />
-			<label for="membershipAdmin">Admin</label>
+			<label for="accountUpdateType">Update account to:</label>
+			<div class="accountUpdateTypeContainer">
+				<input type="radio" name="accountUpdateType" value="admin" />
+				<label for="accountUpdateType" required>Admin</label>
 
-			<input type="radio" name="membershipMember" />
-			<label for="membershipMember">Member</label>
+				<input type="radio" name="accountUpdateType" value="member" />
+				<label for="accountUpdateType">Member</label>
+			</div>
 		</div>
 		<div>
-			<label for="membershipTypePassword">Account update password:</label>
-			<input type="password" name="password" required />
+			<label for="accountUpdatePassword">Account update password:</label>
+			<div class="accountUpdatePasswordContainer">
+				<input type="password" name="accountUpdatePassword" required />
+			</div>
 		</div>
 		<button>Submit</button>
 	</form>

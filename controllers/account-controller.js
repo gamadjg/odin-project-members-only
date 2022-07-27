@@ -1,6 +1,8 @@
 const Users = require("../models/account-schema");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
+const adminToken = process.env.ADMIN_TOKEN;
+const memberToken = process.env.MEMBER_TOKEN;
 
 const createUser = (req, res) => {
 	//console.log(`User email: ${req.body.email}`);
@@ -48,8 +50,44 @@ const logout = (req, res) => {
 	});
 };
 
+const updateAccountType = (req, res) => {
+	switch (req.body.accountUpdateType) {
+		case "admin":
+			if (req.body.accountUpdatePassword === adminToken) {
+				Users.findByIdAndUpdate(
+					req.user._id,
+					{ accountType: "admin" },
+					(err) => {
+						if (err) {
+							console.log(err);
+						} else {
+							res.redirect("/");
+						}
+					}
+				);
+			}
+			break;
+		case "member":
+			if (req.body.accountUpdatePassword === memberToken) {
+				Users.findByIdAndUpdate(
+					req.user._id.toString(),
+					{ accountType: "member" },
+					(err) => {
+						if (err) {
+							console.log(err);
+						} else {
+							res.redirect("/");
+						}
+					}
+				);
+			}
+			break;
+	}
+};
+
 module.exports = {
 	createUser,
 	login,
 	logout,
+	updateAccountType,
 };
