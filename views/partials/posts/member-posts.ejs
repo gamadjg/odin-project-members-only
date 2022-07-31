@@ -1,0 +1,11 @@
+<% if(posts.length > 0){posts.forEach(post => {%>
+<div class="postContainer">
+	<div class="postHeader">
+		<h4 class="postTitle"><%= post.postTitle %></h4>
+		<h4 class="postAuthor"><%= post.userDisplayName %></h4>
+	</div>
+	<p class="postBody"><%= post.postBody %></p>
+</div>
+<% })} else { %>
+<p>no posts available</p>
+<% } %>

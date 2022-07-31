@@ -1,46 +1,11 @@
 <div id="postsMain">
-	<% if(user){ %>
-	<div id="createPostContainer"><%- include("./posts-create.ejs") %></div>
-	<div id="postsContainer">
-		<% if(postsList.length > 0){postsList.forEach(post => {%>
-		<div class="post">
-			<div class="postHeader">
-				<h4 class="postTitle"><%= post.postTitle %></h4>
-				<% if(user.accountType === "user") {%>
-				<h4 class="postAuthor">
-					<%= user._id.toString() === post.userId ? post.userDisplayName :
-					"Anonymous"%>
-				</h4>
-				<% }else{ %> <%if(user.accountType === "admin") { %>
-				<i
-					data-doc="<%= post._id.toString() %>"
-					class="trash fa-solid fa-trash-can"
-				></i>
-				<% } %>
-				<h4 class="postAuthor"><%= post.userDisplayName %></h4>
-				<% } %>
-			</div>
-			<p class="postBody"><%= post.postBody %></p>
-		</div>
-		<% })} else { %>
-		<p>no posts available</p>
-		<% } %>
-	</div>
-	<% }else{ %>
-	<div id="postsContainer">
-		<% if(postsList.length > 0){postsList.forEach(post => {%>
-		<div class="post">
-			<div class="postHeader">
-				<h4 class="postTitle"><%= post.postTitle %></h4>
-				<h4 class="postAuthor">Anonymous</h4>
-			</div>
-			<p class="postBody"><%= post.postBody %></p>
-		</div>
-		<% })} else { %>
-		<p>no posts available</p>
-		<% } %>
-	</div>
-	<% } %>
+	<% if(user){ %> <%- include("./posts-create.ejs"); %> <% switch
+	(user.accountType) { case 'admin': %> <%- include("./posts/admin-posts.ejs",
+	{posts: posts}); %> <% break; case 'member': %> <%-
+	include("./posts/member-posts.ejs", {posts: posts}); %> <% break; case 'user':
+	%> <%- include("./posts/user-posts.ejs", {posts: posts}); %> <% break;
+	default: break; %> <% }} else { %> <%- include("./posts/anonymous-posts.ejs",
+	{posts: posts}); %> <% } %>
 </div>
 <script>
 	const posts = document.querySelectorAll("i.trash");
