@@ -1,12 +1,17 @@
-<div id="postsMain">
-	<% if(user){ %> <%- include("./posts-create.ejs"); %> <% switch
-	(user.accountType) { case 'admin': %> <%- include("./posts/admin-posts.ejs",
-	{posts: posts}); %> <% break; case 'member': %> <%-
-	include("./posts/member-posts.ejs", {posts: posts}); %> <% break; case 'user':
-	%> <%- include("./posts/user-posts.ejs", {posts: posts}); %> <% break;
-	default: break; %> <% }} else { %> <%- include("./posts/anonymous-posts.ejs",
-	{posts: posts}); %> <% } %>
+<% if(user){ %>
+<div class="createPostsContainer"><%- include("./posts-create.ejs"); %></div>
+<% switch(user.accountType) { case 'admin': %>
+<div class="postsMain">
+	<%- include("./admin-posts.ejs", {posts: posts}); %>
 </div>
+<% break; case 'member': %>
+<div class="postsMain">
+	<%-include("./member-posts.ejs", {posts: posts}); %>
+</div>
+<% break; case 'user':%>
+<div class="postsMain"><%- include("./user-posts.ejs", {posts: posts}); %></div>
+<% break; default: break; %> <% }} else { %> <%-
+include("./anonymous-posts.ejs", {posts: posts}); %> <% } %>
 <script>
 	const posts = document.querySelectorAll("i.trash");
 	posts.forEach((element) => {

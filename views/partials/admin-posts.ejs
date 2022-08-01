@@ -1,8 +1,13 @@
-<% if(posts.length > 0){posts.forEach(post => {%>
+<% if(posts.length > 0){posts.forEach(post => { %>
 <div class="postContainer">
 	<div class="postHeader">
 		<h4 class="postTitle"><%= post.postTitle %></h4>
 		<h4 class="postAuthor"><%= post.userDisplayName %></h4>
+		<i
+			data-doc="<%= post._id.toString() %>"
+			class="trash fa-solid fa-trash-can"
+		></i>
+		<div class="postDate"><%= post.updatedAt.toDateString() %></div>
 	</div>
 	<p class="postBody"><%= post.postBody %></p>
 </div>

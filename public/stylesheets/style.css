@@ -24,8 +24,23 @@ p {
 }
 
 .accountIcon {
-	max-width: 50px;
-	max-height: 50px;
+	/* margin: 0;
+	background-color: white;
+	border-radius: 50%;
+	border: 1px solid grey;
+	padding: 10px; */
+
+	border-radius: 50%;
+	width: 36px;
+	height: 36px;
+	padding: 8px;
+
+	background: #fff;
+	border: 2px solid #666;
+	color: #666;
+	text-align: center;
+
+	font: 32px Arial, sans-serif;
 }
 
 .siteName {
