@@ -5,13 +5,35 @@ body {
 	justify-content: space-between;
 	font-family: Roboto, sans-serif;
 	min-height: 100vh;
+
+	background-color: #4c566a;
+}
+
+.siteName {
+	color: #81a1c1;
+}
+
+.pageTitle {
+	color: #81a1c1;
+}
+
+.postTitle {
+	color: #81a1c1;
+}
+
+.postAuthor {
+	color: #81a1c1;
+}
+
+.postBody {
+	color: #81a1c1;
 }
 
 nav {
 	display: flex;
 	justify-content: space-between;
 	margin: 10px 10px;
-	border-bottom: 2px solid black;
+	border-bottom: 2px solid #81a1c1;
 	height: 56px;
 }
 
@@ -86,7 +108,7 @@ nav > * {
 .nav-link,
 .nav-link:visited,
 .nav-link:active {
-	color: inherit;
+	color: #81a1c1;
 	text-decoration: none;
 }
 
@@ -119,7 +141,7 @@ button {
 
 footer {
 	display: flex;
-	border-top: 2px solid black;
+	border-top: 2px solid #81a1c1;
 	padding: 2px;
 	margin: 10px;
 	justify-content: space-between;
@@ -129,4 +151,9 @@ footer {
 	/* margin-top: 5px; */
 	display: flex;
 	gap: 10px;
+}
+
+.githubIcon,
+.linkedinIcon {
+	color: #81a1c1;
 }

@@ -7,7 +7,7 @@ const session = require("express-session");
 
 const createUser = (req, res) => {
 	//console.log(`User email: ${req.body.email}`);
-	Users.findOne({ email: req.body.email }, (err, user) => {
+	Users.findOne({ username: req.body.username }, (err, user) => {
 		if (err) {
 			console.log(err);
 		}
@@ -15,8 +15,8 @@ const createUser = (req, res) => {
 			console.log("Creating user.");
 			bcrypt.hash(req.body.password, 10, (err, hashedPwd) => {
 				const newUser = new Users({
-					name: req.body.name,
-					username: req.body.email,
+					userDisplayName: req.body.displayName,
+					username: req.body.username,
 					password: hashedPwd,
 					accountType: "user",
 				});

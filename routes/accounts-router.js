@@ -10,7 +10,6 @@ router.get("/", (req, res) => {
 		title: "User Account",
 		page: "account-user",
 		user: req.user,
-		errorMessage: "test",
 	});
 });
 
@@ -19,7 +18,6 @@ router.get("/log-in", function (req, res) {
 		title: "Account Login",
 		page: "account-log-in",
 		user: req.user,
-		errorMessage: "test",
 	});
 });
 
@@ -37,7 +35,6 @@ router.get("/sign-up", (req, res) => {
 		title: "Account Sign Up",
 		page: "account-sign-up",
 		user: req.user,
-		errorMessage: "test",
 	});
 });
 
@@ -58,7 +55,6 @@ router.get("/update-account-type", (req, res) => {
 		title: "Update Membership Form",
 		page: "account-membership-update",
 		user: req.user,
-		errorMessage: er,
 	});
 	//delete res.session.error;
 });
