@@ -91,7 +91,7 @@ passport.deserializeUser((id, done) =>
 
 // default 404 page
 app.use((req, res) => {
-	res.render("error", { title: "ERROR" });
+	res.render("404", { title: "ERROR", user: req.user });
 });
 
 module.exports = app;

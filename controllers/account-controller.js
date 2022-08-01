@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const adminToken = process.env.ADMIN_TOKEN;
 const memberToken = process.env.MEMBER_TOKEN;
+const session = require("express-session");
 
 const createUser = (req, res) => {
 	//console.log(`User email: ${req.body.email}`);
@@ -21,7 +22,7 @@ const createUser = (req, res) => {
 				});
 				newUser
 					.save()
-					.then((result) => {
+					.then(() => {
 						res.redirect("/");
 					})
 					.catch((err) => {
@@ -65,6 +66,14 @@ const updateAccountType = (req, res) => {
 						}
 					}
 				);
+			} else {
+				res.render("index", {
+					title: "Incorrect Password",
+					page: "error",
+					user: req.user,
+					message:
+						"Incorrect password, please return to membership update page and try again.",
+				});
 			}
 			break;
 		case "member":
@@ -80,6 +89,14 @@ const updateAccountType = (req, res) => {
 						}
 					}
 				);
+			} else {
+				res.render("index", {
+					title: "Incorrect Password",
+					page: "error",
+					user: req.user,
+					message:
+						"Incorrect password, please return to membership update page and try again.",
+				});
 			}
 			break;
 	}
