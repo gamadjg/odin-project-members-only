@@ -1,78 +1,81 @@
 const express = require("express");
 const router = express.Router();
-//const session = require("express-session");
-
+const { body, validationResult, check } = require("express-validator");
 const accountController = require("../controllers/account-controller");
-const postsController = require("../controllers/posts-controller");
 
 router.get("/", (req, res) => {
-	res.render("index", {
-		title: "User Account",
-		page: "account-user",
-		user: req.user,
-	});
+  res.render("index", {
+    title: "User Account",
+    page: "account-user",
+    user: req.user,
+  });
 });
 
 router.get("/log-in", function (req, res) {
-	res.render("index", {
-		title: "Account Login",
-		page: "account-log-in",
-		user: req.user,
-	});
+  res.render("index", {
+    title: "Account Login",
+    page: "account-log-in",
+    user: req.user,
+  });
 });
 
 router.post("/log-in", (req, res) => {
-	try {
-		//console.log("Calling login module");
-		accountController.login(req, res);
-	} catch (error) {
-		console.log(error);
-	}
+  accountController.login(req, res);
 });
 
 router.get("/sign-up", (req, res) => {
-	res.render("index", {
-		title: "Account Sign Up",
-		page: "account-sign-up",
-		user: req.user,
-	});
+  res.render("index", {
+    title: "Account Sign Up",
+    page: "account-sign-up",
+    user: req.user,
+  });
 });
 
-router.post("/sign-up", (req, res) => {
-	try {
-		accountController.createUser(req, res);
-	} catch (error) {
-		console.log(error);
-	}
-});
+router.post(
+  "/sign-up",
+  [
+    check("username", "Email is not valid.").isEmail(),
+    check("password", "Missing password.").exists(),
+    check("confirmPassword", "Passwords do not match.")
+      .trim()
+      .custom((confirmPassword, { req }) => {
+        const password = req.body.password;
+
+        if (password !== confirmPassword) {
+          throw new Error("Passwords must be same");
+        }
+      }),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (errors) {
+      const alert = errors.array();
+      res.render("index", {
+        title: "Account Sign Up",
+        page: "account-sign-up",
+        user: req.user,
+        alert,
+      });
+    } else {
+      accountController.createUser(req, res);
+    }
+  }
+);
 
 router.get("/update-account-type", (req, res) => {
-	// console.log(`error: ${req.session.error}`);
-	// console.log(typeof req.session.error);
-	const er = req.session.error;
-	//console.log(er);
-	res.render("index", {
-		title: "Update Membership Form",
-		page: "account-membership-update",
-		user: req.user,
-	});
-	//delete res.session.error;
+  res.render("index", {
+    title: "Update Membership Form",
+    page: "account-membership-update",
+    user: req.user,
+  });
 });
 
 router.post("/update-account-type", (req, res) => {
-	try {
-		accountController.updateAccountType(req, res);
-	} catch (error) {
-		console.log(error);
-	}
+  accountController.updateAccountType(req, res);
 });
 
 router.get("/log-out", (req, res) => {
-	try {
-		accountController.logout(req, res);
-	} catch (error) {
-		console.log(error);
-	}
+  accountController.logout(req, res);
 });
 
 module.exports = router;

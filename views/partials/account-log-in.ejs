@@ -1,12 +1,21 @@
 <div class="formMain">
 	<form action="/account/log-in" method="POST">
-		<div>
-			<input name="username" type="email" placeholder="Email" required />
-		</div>
-		<div>
-			<input name="password" type="password" placeholder="Password" required />
-		</div>
+		<label for="username" class="formLabel">Email</label>
+		<input
+			name="username"
+			type="email"
+			placeholder="Email"
+			id="username"
+			required
+		/>
+		<label for="password" class="formLabel">Password</label>
+		<input
+			name="password"
+			type="password"
+			placeholder="Password"
+			id="password"
+			required
+		/>
 		<button>Log In</button>
 	</form>
-	<a href="">Forgot Password</a>
 </div>
