@@ -1,6 +1,7 @@
 <% if(posts.length > 0){posts.forEach(post => {%>
 <div class="postContainer">
 	<div class="postHeader">
+		<h4 class="accountIcon"><%= user.userDisplayName.charAt(0) %></h4>
 		<h4 class="postTitle"><%= post.postTitle %></h4>
 		<h4 class="postAuthor"><%= post.userDisplayName %></h4>
 		<div class="postDate"><%= post.updatedAt.toDateString() %></div>
