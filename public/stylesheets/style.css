@@ -1,3 +1,4 @@
+/***********************************GLOBAL***********************************/
 body {
 	margin: 0px;
 	display: flex;
@@ -8,30 +9,42 @@ body {
 	background-color: #4c566a;
 }
 
-p {
+/* p {
 	margin: 5px;
-}
+} */
 
-nav {
+nav,
+footer {
 	display: flex;
 	justify-content: space-between;
 	margin: 10px;
 	padding: 5px;
-	border-bottom: 2px solid #81a1c1;
-	height: 56px;
+	/* height: 56px; */
 }
 
-nav > * {
+nav > *,
+footer > * {
 	display: flex;
-	flex-direction: row;
-	align-content: space-between;
-	/* gap: 5px; */
+	align-items: flex-end;
+}
+.nav-left > *,
+.nav-right > *,
+.footer-left > *,
+.footer-right > * {
+	padding: 0 10px;
 }
 
-a {
-	padding: 0;
+main {
+	margin: 0 10px;
+	flex: auto;
+	display: flex;
+	justify-content: center;
+	align-items: stretch;
+	border-top: 2px solid #81a1c1;
+	border-bottom: 2px solid #81a1c1;
 }
 
+/***********************************HEADER EXCLUSIVE***********************************/
 .siteName {
 	color: #81a1c1;
 	margin: 0;
@@ -56,20 +69,6 @@ a {
 	font: 32px Arial, sans-serif;
 }
 
-.nav-left > * {
-	flex: auto;
-	/* align-self: center; */
-	/* padding: 0 5px; */
-	/* margin-bottom: 10px; */
-}
-
-.nav-right > * {
-	flex: auto;
-	align-self: center;
-	/* padding: 0 5px; */
-	/* margin-bottom: 10px; */
-}
-
 #iconPlaceHolder {
 	width: 50px;
 	height: 50px;
@@ -80,18 +79,10 @@ a {
 .nav-link:active {
 	color: #81a1c1;
 	text-decoration: none;
-	padding: 0 16px;
 }
 
 .nav-link:hover {
 	font-weight: bold;
-}
-
-main {
-	flex: auto;
-	display: flex;
-	justify-content: center;
-	align-items: stretch;
 }
 
 .postsMain {
@@ -149,19 +140,6 @@ button {
 	flex: auto;
 	align-self: center;
 	max-width: 50%;
-}
-
-footer {
-	display: flex;
-	border-top: 2px solid #81a1c1;
-	padding: 5px;
-	margin: 10px;
-	justify-content: space-between;
-}
-
-.footer-left {
-	display: flex;
-	gap: 10px;
 }
 
 .githubIcon,

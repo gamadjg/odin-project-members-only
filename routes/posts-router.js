@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const postsController = require("../controllers/posts-controller");
 
-router.get("/user-posts", function (req, res) {
+router.get("/posts-user", function (req, res) {
 	try {
 		postsController.getUserPosts(req, res);
 	} catch (error) {
