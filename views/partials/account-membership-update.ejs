@@ -1,5 +1,4 @@
-
-<form class="generalForm action="/account/update-account-type" method="POST">
+<form class="generalForm" action="/account/update-account-type" method="POST">
 	<label class="formLabel">Update account to:</label>
 	<div>
 		<input
@@ -7,8 +6,9 @@
 			name="accountUpdateType"
 			id="accountUpdateAdmin"
 			value="admin"
+			required
 		/>
-		<label class="formLabel" for="accountUpdateAdmin" required>Admin</label>
+		<label class="formLabel" for="accountUpdateAdmin">Admin</label>
 	</div>
 	<div>
 		<input
@@ -16,6 +16,7 @@
 			name="accountUpdateType"
 			id="accountUpdateMember"
 			value="member"
+			required
 		/>
 		<label class="formLabel" for="accountUpdateMember">Member</label>
 	</div>

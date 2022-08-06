@@ -112,7 +112,7 @@ main {
 	padding: 5px 6px;
 }
 
-.formInput,
+/* .formInput,
 .formPassword,
 .createPostTitle,
 .createPostBody {
@@ -124,12 +124,10 @@ main {
 	width: 100%;
 	color: #81a1c1;
 	word-break: break-all;
-}
+} */
 
 .formInput,
-.formPassword,
-.createPostTitle:focus,
-.createPostBody:focus {
+.formPassword {
 	font-size: small;
 	outline: none;
 	border-radius: 5px;
@@ -140,21 +138,58 @@ main {
 }
 
 .formInput,
-.formPassword,
+.formPassword {
+	font-size: small;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #23292e;
+	background-color: #23292e;
+	color: #81a1c1;
+	word-break: break-all;
+}
+
 .createPostTitle {
-	height: 30px;
+	font-size: small;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #343d46;
+	background-color: #343d46;
+	color: #81a1c1;
+	height: 50px;
+	width: 100%;
 }
 
 .createPostTitle:focus {
-	height: 30px;
+	font-size: small;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #343d46;
+	background-color: #343d46;
+	color: #81a1c1;
+	height: 50px;
+	width: 100%;
 }
 
 .createPostBody {
+	font-size: small;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #343d46;
+	background-color: #343d46;
+	color: #81a1c1;
 	height: 100px;
+	width: 100%;
 }
 
 .createPostBody:focus {
+	font-size: small;
+	outline: none;
+	border-radius: 5px;
+	border: 1px solid #343d46;
+	background-color: #343d46;
+	color: #81a1c1;
 	height: 100px;
+	width: 100%;
 }
 
 .formButton {
