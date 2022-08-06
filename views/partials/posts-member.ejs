@@ -1,7 +1,9 @@
 <% if(posts.length > 0){posts.forEach(post => {%>
 <div class="post">
-	<p class="userIcon"><%= post.userDisplayName.charAt(0) %></p>
-	<p class="postTitle"><%= post.postTitle %></p>
+	<div class="postHead">
+		<p class="userIcon"><%= post.userDisplayName.charAt(0) %></p>
+		<p class="postTitle"><%= post.postTitle %></p>
+	</div>
 	<p class="postBody"><%= post.postBody %></p>
 	<div class="postFooter">
 		<div class="postFooterLeft">

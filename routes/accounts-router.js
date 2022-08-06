@@ -19,9 +19,59 @@ router.get("/log-in", function (req, res) {
   });
 });
 
-router.post("/log-in", (req, res) => {
-  accountController.login(req, res);
-});
+router.post("/log-in", [
+  check("username").isEmail(),
+  check("password")
+    .exists()
+    .trim()
+    .custom((req) => {
+      console.log("test1");
+      const validAccount = accountController.login(req, res);
+
+      if (!validAccount) {
+        console.log("error");
+        res.render("index", {
+          title: "Account Login",
+          page: "account-log-in",
+          user: req.user,
+          alert,
+        });
+        //throw new Error("Incorrect credentials! Please try again.");
+      } else {
+        console.log("successful login");
+        res.render("index", {
+          title: "Account Login",
+          page: "account-log-in",
+          user: req.user,
+          alert: "Welcome back!",
+        });
+      }
+    }),
+]);
+//   ],
+//   (validAccount) => {
+//     console.log(`VALID ACCOUNT??? ----> ${validAccount}<----`);
+//     const alert = validationResult(req);
+//     console.log(`alert-----> ${alert}`);
+//     if (validAccount) {
+//       console.log("re-rendering login");
+//       res.render("index", {
+//         title: "Account Login",
+//         page: "account-log-in",
+//         user: req.user,
+//         alert,
+//       });
+//     } else {
+//       console.log("successful login");
+//       res.render("index", {
+//         title: "Account Login",
+//         page: "account-log-in",
+//         user: req.user,
+//         alert: "Welcome back!",
+//       });
+//     }
+//   }
+// );
 
 router.get("/sign-up", (req, res) => {
   res.render("index", {

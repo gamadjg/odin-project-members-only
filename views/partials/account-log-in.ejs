@@ -1,7 +1,16 @@
-<form action="/account/log-in" method="POST">
-	<label class="formLabel" for="username" class="formLabel">Email</label>
+<% if(typeof alert != 'undefined') { alert => { %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	<%= alert.msg %>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<% }}%>
+
+<form class="generalForm" action="/account/log-in" method="POST">
+	<label class="formLabel" for="username">Email</label>
 	<input class="formInput" name="username" type="email" required />
-	<label class="formLabel" for="password" class="formLabel">Password</label>
+	<label class="formLabel" for="password">Password</label>
 	<input class="formInput" name="password" type="password" required />
 	<button class="formButton">Log In</button>
 </form>

@@ -1,6 +1,6 @@
 <form class="generalForm" action="/account/update-account-type" method="POST">
 	<label class="formLabel">Update account to:</label>
-	<div>
+	<div class="formRadioOption">
 		<input
 			type="radio"
 			name="accountUpdateType"
@@ -8,9 +8,9 @@
 			value="admin"
 			required
 		/>
-		<label class="formLabel" for="accountUpdateAdmin">Admin</label>
+		<label class="formRadioLabel" for="accountUpdateAdmin">Admin</label>
 	</div>
-	<div>
+	<div class="formRadioOption">
 		<input
 			type="radio"
 			name="accountUpdateType"
@@ -18,13 +18,13 @@
 			value="member"
 			required
 		/>
-		<label class="formLabel" for="accountUpdateMember">Member</label>
+		<label class="formRadioLabel" for="accountUpdateMember">Member</label>
 	</div>
 	<label class="formLabel" for="accountUpdatePassword">
 		Password Authorization:
 	</label>
 	<input
-		class="formPassword"
+		class="formInput"
 		type="password"
 		name="accountUpdatePassword"
 		required

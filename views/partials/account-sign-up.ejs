@@ -7,41 +7,29 @@
 </div>
 <% }) %> <% } %>
 
-<form action="/account/sign-up" method="POST">
+<form class="generalForm" action="/account/sign-up" method="POST">
 	<label for="displayName" class="formLabel">Display Name</label>
-	<input
-		name="displayName"
-		type="text"
-		placeholder="Display Name"
-		id="displayName"
-		required
-	/>
+	<input class="formInput" name="displayName" type="text" required />
 
 	<label for="username" class="formLabel">Email</label>
-	<input
-		name="username"
-		type="email"
-		placeholder="Email"
-		id="username"
-		required
-	/>
+	<input class="formInput" name="username" type="email" required />
 
 	<label for="password" class="formLabel">Password</label>
 	<input
+		class="formInput"
 		name="password"
 		type="password"
-		placeholder="Password"
 		id="password"
 		required
 	/>
 
 	<label for="confirmPassword" class="formLabel">Password Confirmation</label>
 	<input
+		class="formInput"
 		name="confirmPassword"
 		type="password"
-		placeholder="Password Confirmation"
 		id="confirmPassword"
 		required
 	/>
-	<button>Sign Up</button>
+	<button class="formButton">Sign Up</button>
 </form>

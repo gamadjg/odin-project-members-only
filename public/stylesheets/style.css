@@ -87,6 +87,7 @@ main {
 /***********************************POSTS***********************************/
 .postsMain {
 	margin: 10px 0;
+	padding-top: 50px;
 	width: 50%;
 }
 
@@ -112,39 +113,36 @@ main {
 	padding: 5px 6px;
 }
 
-/* .formInput,
-.formPassword,
-.createPostTitle,
-.createPostBody {
-	font-size: small;
-	border-radius: 5px;
-	border: 1px solid #343d46;
-	background-color: #343d46;
-	padding: 4px;
-	width: 100%;
-	color: #81a1c1;
-	word-break: break-all;
-} */
+.formRadioLabel {
+	color: lightgrey;
+	font-size: normal;
+	font-weight: bold;
+	margin: 0;
+}
 
-.formInput,
-.formPassword {
+.formRadioOption {
+	margin: 5px 0 0 10px;
+}
+
+.formInput {
 	font-size: small;
 	outline: none;
 	border-radius: 5px;
 	border: 1px solid #343d46;
 	background-color: #343d46;
 	color: #81a1c1;
+	width: 100%;
 	word-break: break-all;
 }
 
-.formInput,
-.formPassword {
+.formInput {
 	font-size: small;
 	outline: none;
 	border-radius: 5px;
 	border: 1px solid #23292e;
 	background-color: #23292e;
 	color: #81a1c1;
+	width: 100%;
 	word-break: break-all;
 }
 
