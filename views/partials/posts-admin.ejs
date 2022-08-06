@@ -1,16 +1,22 @@
 <% if(posts.length > 0){posts.forEach(post => { %>
-<div class="postContainer">
-	<div class="postHeader">
-		<h4 class="accountIcon"><%= user.userDisplayName.charAt(0) %></h4>
-		<h4 class="postTitle"><%= post.postTitle %></h4>
-		<h4 class="postAuthor"><%= post.userDisplayName %></h4>
+<div class="post">
+	<div class="postHead">
+		<p class="userIcon"><%= post.userDisplayName.charAt(0) %></p>
+		<p class="postTitle"><%= post.postTitle %></p>
+	</div>
+	<p class="postBody"><%= post.postBody %></p>
+	<div class="postFooter">
+		<div class="postFooterLeft">
+			Posted by&nbsp;
+			<p class="userDisplayName"><%= post.userDisplayName %>,</p>
+			&nbsp;on&nbsp;
+			<p class="postDate"><%= post.updatedAt.toDateString() %>.</p>
+		</div>
 		<i
 			data-doc="<%= post._id.toString() %>"
 			class="trash fa-solid fa-trash-can"
 		></i>
-		<div class="postDate"><%= post.updatedAt.toDateString() %></div>
 	</div>
-	<p class="postBody"><%= post.postBody %></p>
 </div>
 <% })} else { %>
 <p>no posts available</p>

@@ -1,51 +1,47 @@
-<% if(typeof alert != 'undefined') { %> 
-	<% alert.forEach(error => { %> 
-		<div class="alert alert-warning alert-dismissible fade show" role="alert">
-			<%= error.msg %> 
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-	<% }) %>
-<% } %>
-
-<div class="formMain">
-	<form action="/account/sign-up" method="POST">
-		<label for="displayName" class="formLabel">Display Name</label>
-		<input
-			name="displayName"
-			type="text"
-			placeholder="Display Name"
-			id="displayName"
-			required
-		/>
-
-		<label for="username" class="formLabel">Email</label>
-		<input
-			name="username"
-			type="email"
-			placeholder="Email"
-			id="username"
-			required
-		/>
-
-		<label for="password" class="formLabel">Password</label>
-		<input
-			name="password"
-			type="password"
-			placeholder="Password"
-			id="password"
-			required
-		/>
-
-		<label for="confirmPassword" class="formLabel">Password Confirmation</label>
-		<input
-			name="confirmPassword"
-			type="password"
-			placeholder="Password Confirmation"
-			id="confirmPassword"
-			required
-		/>
-		<button>Sign Up</button>
-	</form>
+<% if(typeof alert != 'undefined') { %> <% alert.forEach(error => { %>
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+	<%= error.msg %>
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span>
+	</button>
 </div>
+<% }) %> <% } %>
+
+<form action="/account/sign-up" method="POST">
+	<label for="displayName" class="formLabel">Display Name</label>
+	<input
+		name="displayName"
+		type="text"
+		placeholder="Display Name"
+		id="displayName"
+		required
+	/>
+
+	<label for="username" class="formLabel">Email</label>
+	<input
+		name="username"
+		type="email"
+		placeholder="Email"
+		id="username"
+		required
+	/>
+
+	<label for="password" class="formLabel">Password</label>
+	<input
+		name="password"
+		type="password"
+		placeholder="Password"
+		id="password"
+		required
+	/>
+
+	<label for="confirmPassword" class="formLabel">Password Confirmation</label>
+	<input
+		name="confirmPassword"
+		type="password"
+		placeholder="Password Confirmation"
+		id="confirmPassword"
+		required
+	/>
+	<button>Sign Up</button>
+</form>

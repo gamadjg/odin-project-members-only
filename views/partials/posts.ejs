@@ -1,32 +1,34 @@
 <div class="postsMain">
 	<% if(user){ %>
-	<div class="createPostsContainer"><%- include("./posts-create.ejs"); %></div>
+	<div class="formsContainer"><%- include("./posts-create.ejs"); %></div>
 	<% switch(user.accountType) { case 'admin': %>
-	<div class="postsMain">
+	<div class="postsContainer">
 		<%- include("./posts-admin.ejs", {posts: posts}); %>
 	</div>
 	<% break; case 'member': %>
-	<div class="postsMain">
+	<div class="postsContainer">
 		<%- include("./posts-member.ejs", {posts: posts}); %>
 	</div>
 	<% break; case 'user': %>
-	<div class="postsMain">
+	<div class="postsContainer">
 		<%- include("./posts-user.ejs", {posts: posts}); %>
 	</div>
-	<% break; %> <% }} else { %> <%- include("./posts-anonymous.ejs", {posts:
-	posts}); %> <% } %>
-</div>
-<script>
-	const posts = document.querySelectorAll("i.trash");
-	posts.forEach((element) => {
-		element.addEventListener("click", (event) => {
-			console.log("trashcan clicked");
-			const endpoint = `/posts/delete/${document.title}/${element.dataset.doc}`;
+	<% break; %> <% }} else { %>
+	<div class="postsContainer">
+		<%- include("./posts-anonymous.ejs", {posts: posts}); %> <% } %>
+	</div>
+	<script>
+		const posts = document.querySelectorAll("i.trash");
+		posts.forEach((element) => {
+			element.addEventListener("click", (event) => {
+				console.log("trashcan clicked");
+				const endpoint = `/posts/delete/${document.title}/${element.dataset.doc}`;
 
-			fetch(endpoint, { method: "DELETE" })
-				.then((response) => response.json())
-				.then((data) => (window.location.href = data.redirect))
-				.catch((error) => console.log(error));
+				fetch(endpoint, { method: "DELETE" })
+					.then((response) => response.json())
+					.then((data) => (window.location.href = data.redirect))
+					.catch((error) => console.log(error));
+			});
 		});
-	});
-</script>
+	</script>
+</div>

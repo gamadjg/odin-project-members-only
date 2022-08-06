@@ -1,25 +1,32 @@
-<div class="formMain">
-	<form
-		action="/account/update-account-type"
-		method="POST"
-		id="accountUpdateForm"
-	>
-		<div>
-			<label for="accountUpdateType">Update account to:</label>
-			<div class="accountUpdateTypeContainer">
-				<input type="radio" name="accountUpdateType" value="admin" />
-				<label for="accountUpdateType" required>Admin</label>
 
-				<input type="radio" name="accountUpdateType" value="member" />
-				<label for="accountUpdateType">Member</label>
-			</div>
-		</div>
-		<div>
-			<label for="accountUpdatePassword">Account update password:</label>
-			<div class="accountUpdatePasswordContainer">
-				<input type="password" name="accountUpdatePassword" required />
-			</div>
-		</div>
-		<button>Submit</button>
-	</form>
-</div>
+<form class="generalForm action="/account/update-account-type" method="POST">
+	<label class="formLabel">Update account to:</label>
+	<div>
+		<input
+			type="radio"
+			name="accountUpdateType"
+			id="accountUpdateAdmin"
+			value="admin"
+		/>
+		<label class="formLabel" for="accountUpdateAdmin" required>Admin</label>
+	</div>
+	<div>
+		<input
+			type="radio"
+			name="accountUpdateType"
+			id="accountUpdateMember"
+			value="member"
+		/>
+		<label class="formLabel" for="accountUpdateMember">Member</label>
+	</div>
+	<label class="formLabel" for="accountUpdatePassword">
+		Password Authorization:
+	</label>
+	<input
+		class="formPassword"
+		type="password"
+		name="accountUpdatePassword"
+		required
+	/>
+	<button class="formButton">Submit</button>
+</form>

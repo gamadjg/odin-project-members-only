@@ -1,21 +1,7 @@
-<div class="formMain">
-	<form action="/account/log-in" method="POST">
-		<label for="username" class="formLabel">Email</label>
-		<input
-			name="username"
-			type="email"
-			placeholder="Email"
-			id="username"
-			required
-		/>
-		<label for="password" class="formLabel">Password</label>
-		<input
-			name="password"
-			type="password"
-			placeholder="Password"
-			id="password"
-			required
-		/>
-		<button>Log In</button>
-	</form>
-</div>
+<form action="/account/log-in" method="POST">
+	<label class="formLabel" for="username" class="formLabel">Email</label>
+	<input class="formInput" name="username" type="email" required />
+	<label class="formLabel" for="password" class="formLabel">Password</label>
+	<input class="formInput" name="password" type="password" required />
+	<button class="formButton">Log In</button>
+</form>

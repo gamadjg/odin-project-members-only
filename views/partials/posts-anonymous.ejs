@@ -1,12 +1,17 @@
 <% if(posts.length > 0){posts.forEach(post => {%>
-	<div class="postContainer">
-		<div class="postHeader">
-			<i class="fa-solid fa-user"></i>
-			<h4 class="postTitle"><%= post.postTitle %></h4>
-			<h4 class="postAuthor">Anonymous</h4>
+<div class="post">
+	<p class="userIcon">A</p>
+	<p class="postTitle"><%= post.postTitle %></p>
+	<p class="postBody"><%= post.postBody %></p>
+	<div class="postFooter">
+		<div class="postFooterLeft">
+			Posted by:&nbsp;
+			<p class="userDisplayName">Anonymous</p>
+			&nbsp;on&nbsp;
+			<p class="postDate"><%= post.updatedAt.toDateString() %>.</p>
 		</div>
-		<p class="postBody"><%= post.postBody %></p>
 	</div>
+</div>
 <% })} else { %>
-	<p>no posts available</p>
+<p>no posts available</p>
 <% } %>
