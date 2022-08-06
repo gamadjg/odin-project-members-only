@@ -1,15 +1,17 @@
-<% if(user){ %>
-	<div class="createPostsContainer"><%- include("./posts-create.ejs"); %></div>
-	<% switch(user.accountType) { case 'admin': %>
-			<div class="postsMain"><%- include("./admin-posts.ejs", {posts: posts}); %></div>
-		<% break; case 'member': %>
-			<div class="postsMain"><%- include("./member-posts.ejs", {posts: posts}); %></div>
-		<% break; case 'user': %>
-			<div class="postsMain"><%- include("./user-posts.ejs", {posts: posts}); %></div>
-		<% break; %> 
-<% }} else { %> 
-	<%- include("./anonymous-posts.ejs", {posts: posts}); %> 
-<% } %>
+<div class="postsMain">
+	<% if(user){ %>
+		<div class="createPostsContainer"><%- include("./posts-create.ejs"); %></div>
+		<% switch(user.accountType) { case 'admin': %>
+				<div class="postsMain"><%- include("./admin-posts.ejs", {posts: posts}); %></div>
+			<% break; case 'member': %>
+				<div class="postsMain"><%- include("./member-posts.ejs", {posts: posts}); %></div>
+			<% break; case 'user': %>
+				<div class="postsMain"><%- include("./user-posts.ejs", {posts: posts}); %></div>
+			<% break; %> 
+	<% }} else { %> 
+		<%- include("./anonymous-posts.ejs", {posts: posts}); %> 
+	<% } %>
+</div>	
 <script>
 	const posts = document.querySelectorAll("i.trash");
 	posts.forEach((element) => {
