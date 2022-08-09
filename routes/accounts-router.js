@@ -19,48 +19,54 @@ router.get("/log-in", function (req, res) {
   });
 });
 
-router.post("/log-in", [
-  check("username").isEmail(),
-  check("password")
-    .exists()
-    .trim()
-    .custom((req) => {
-      console.log("test1");
-      const validAccount = accountController.login(req, res);
+router.post(
+  "/log-in",
+  [
+    check("username", "Email is not valid.").isEmail(),
+    check("password", "Missing password.")
+      .exists()
+      .trim()
+      .custom((password, { req }) => {
+        const validAccount = accountController.login(req, res);
+        if (!validAccount) {
+          throw new Error("Incorrect user or password, please try again.");
+        }
+      }),
+  ],
+  (req, res) => {
+    console.log(req.user);
+    const errors = validationResult(req);
+    // Error received. Render the account sign up page
+    if (errors) {
+      const alert = errors.array();
+      res.render("index", {
+        title: "Account Login",
+        page: "account-log-in",
+        user: req.user,
+        alert,
+      });
+    } else {
+      accountController.createUser(req, res);
+    }
+  }
+);
+// check("username").isEmail(),
+// check("password")
+//   .exists()
+//   .trim()
+//   .custom((req) => {
+//     console.log("test1");
+//     const validAccount = accountController.login(req, res);
 
-      if (!validAccount) {
-        console.log("error");
-        res.render("index", {
-          title: "Account Login",
-          page: "account-log-in",
-          user: req.user,
-          alert,
-        });
-        //throw new Error("Incorrect credentials! Please try again.");
-      } else {
-        console.log("successful login");
-        res.render("index", {
-          title: "Account Login",
-          page: "account-log-in",
-          user: req.user,
-          alert: "Welcome back!",
-        });
-      }
-    }),
-]);
-//   ],
-//   (validAccount) => {
-//     console.log(`VALID ACCOUNT??? ----> ${validAccount}<----`);
-//     const alert = validationResult(req);
-//     console.log(`alert-----> ${alert}`);
-//     if (validAccount) {
-//       console.log("re-rendering login");
+//     if (!validAccount) {
+//       console.log("error");
 //       res.render("index", {
 //         title: "Account Login",
 //         page: "account-log-in",
 //         user: req.user,
 //         alert,
 //       });
+//       //throw new Error("Incorrect credentials! Please try again.");
 //     } else {
 //       console.log("successful login");
 //       res.render("index", {
@@ -70,8 +76,8 @@ router.post("/log-in", [
 //         alert: "Welcome back!",
 //       });
 //     }
-//   }
-// );
+//   }),
+// ]);
 
 router.get("/sign-up", (req, res) => {
   res.render("index", {
