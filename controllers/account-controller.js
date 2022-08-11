@@ -37,22 +37,41 @@ const createUser = (req, res) => {
   });
 };
 
-const login = passport.authenticate(
-  "local",
-  { failWithError: true },
-  (req, res) => {
-    // Passport.authenticate successful. Route back to account-router with true value
-    if (req.xhr) {
-      return true;
-    }
-  },
-  (req, res) => {
-    // Passport.authenticate failed. Route back to account-router with false value
-    if (req.xhr) {
-      return false;
-    }
-  }
-);
+// const login = (req, res) => {
+//   passport.authenticate("local", function (err, user, info) {
+//     console.log("authenticating");
+//     if (err) {
+//       console.log(err);
+//       res.redirect("/");
+//     }
+//     if (!user) {
+//     }
+//     req.logIn(user, function (err) {
+//       if (err) {
+//         return next(err);
+//       }
+//       return res.redirect("/");
+//     });
+//   });
+// };
+
+// {
+//   successRedirect: "/",
+//   failureRedirect: "/account/log-in",
+//   failWithError: true,
+// }
+// (req, res) => {
+//   // Passport.authenticate successful. Route back to account-router with true value
+//   if (req.xhr) {
+//     return true;
+//   }
+// },
+// (req, res) => {
+//   // Passport.authenticate failed. Route back to account-router with false value
+//   if (req.xhr) {
+//     return false;
+//   }
+// }
 
 const logout = (req, res) => {
   req.logout(function (err) {
@@ -116,7 +135,7 @@ const updateAccountType = (req, res) => {
 
 module.exports = {
   createUser,
-  login,
+  //login,
   logout,
   updateAccountType,
 };

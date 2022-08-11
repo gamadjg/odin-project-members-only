@@ -1,25 +1,33 @@
 // Env
 require("dotenv").config();
+const express = require("express");
+const session = require("express-session");
+const passport = require("passport");
+const LocalStrategy = require("passport-local").Strategy;
+const mongoose = require("mongoose");
+const Users = require("./models/account-schema");
+//const Schema = mongoose.Schema;
+const bcrypt = require("bcryptjs");
 const dburi = process.env.DBURI;
 const port = process.env.PORT;
 
-// Express imports
-const express = require("express");
-const session = require("express-session");
-const bodyParser = require("body-parser");
+// Password encrytpion imports
+// const LocalStrategy = require("passport-local").Strategy;
+// const passport = require("passport");
+// const bcrypt = require("bcryptjs");
+
 const app = express();
 
-// Password encrytpion imports
-const LocalStrategy = require("passport-local").Strategy;
-const passport = require("passport");
-const bcrypt = require("bcryptjs");
+// Express imports
+// const express = require("express");
+// const bodyParser = require("body-parser");
 
 // Database
-const mongoose = require("mongoose");
-const Users = require("./models/account-schema");
+// const mongoose = require("mongoose");
+// const Users = require("./models/account-schema");
 
 // Routing
-const createError = require("http-errors");
+// const createError = require("http-errors");
 const indexRouter = require("./routes/index-router");
 const accountRouter = require("./routes/accounts-router");
 const postsRouter = require("./routes/posts-router");
@@ -29,14 +37,14 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 
 // Application config
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static("public"));
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
-
-// password encryption setup
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(express.urlencoded({ extended: false }));
+
+// app.use(express.json());
+// app.use(express.urlencoded({ extended: false }));
+app.use(express.static("public"));
 
 // Routing config
 app.use("/", indexRouter);
@@ -59,19 +67,17 @@ passport.use(
   new LocalStrategy((username, password, done) => {
     Users.findOne({ username: username }, (err, user) => {
       if (err) {
-        console.log(err);
         return done(err);
       }
       if (!user) {
-        console.log(err);
-        return done(null, false, { message: "Incorrect username" });
+        console.log("Invalid credeials.");
+        return done(null, false, { message: "Invalid Credentials" });
       }
       bcrypt.compare(password, user.password, (err, res) => {
         if (res) {
           console.log("Successful login. Returning user account.");
-          return done(null, user);
+          return done(null, user, { message: "Login Successful" });
         } else {
-          // passwords do not match!
           console.log("Incorrect password.");
           return done(null, false, { message: "Incorrect password" });
         }

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
-const { body, validationResult, check } = require("express-validator");
+const { check, validationResult } = require("express-validator");
 const accountController = require("../controllers/account-controller");
+const passport = require("passport");
 
 router.get("/", (req, res) => {
   res.render("index", {
@@ -21,63 +22,87 @@ router.get("/log-in", function (req, res) {
 
 router.post(
   "/log-in",
-  [
-    check("username", "Email is not valid.").isEmail(),
-    check("password", "Missing password.")
-      .exists()
-      .trim()
-      .custom((password, { req }) => {
-        const validAccount = accountController.login(req, res);
-        if (!validAccount) {
-          throw new Error("Incorrect user or password, please try again.");
-        }
-      }),
-  ],
-  (req, res) => {
-    console.log(req.user);
-    const errors = validationResult(req);
-    // Error received. Render the account sign up page
-    if (errors) {
-      const alert = errors.array();
-      res.render("index", {
-        title: "Account Login",
-        page: "account-log-in",
-        user: req.user,
-        alert,
-      });
-    } else {
-      accountController.createUser(req, res);
+  passport.authenticate(
+    "local",
+    {
+      successRedirect: "/",
+      failureRedirect: "/account/log-in",
+      //    failureRedirect: "/account/log-in",
+    },
+    (req, res, info) => {
+      console.log(req.session.messages);
     }
-  }
+  )
 );
-// check("username").isEmail(),
-// check("password")
-//   .exists()
-//   .trim()
-//   .custom((req) => {
-//     console.log("test1");
-//     const validAccount = accountController.login(req, res);
 
-//     if (!validAccount) {
-//       console.log("error");
+// (req, res, next) => {
+//   console.log(req.session.messages);
+//   res.render("index", {
+//     title: "Account Login",
+//     page: "account-log-in",
+//     user: req.user,
+//   });
+// }
+// );
+
+//   function (err, user, info) {
+//     console.log("authenticating");
+//     if (err) {
+//       res.render("404", { title: "ERROR", user: req.user });
+//     }
+//     if (!user) {
 //       res.render("index", {
 //         title: "Account Login",
 //         page: "account-log-in",
 //         user: req.user,
-//         alert,
-//       });
-//       //throw new Error("Incorrect credentials! Please try again.");
-//     } else {
-//       console.log("successful login");
-//       res.render("index", {
-//         title: "Account Login",
-//         page: "account-log-in",
-//         user: req.user,
-//         alert: "Welcome back!",
+//         alert: info.message,
 //       });
 //     }
-//   }),
-// ]);
+//   })
+// );
+// function (req, res) {
+//   check("username", "Email is not valid.").isEmail();
+//   check("password", "Missing password.").exists();
+
+//   console.log("login validation complete");
+
+// const errors = validationResult(req);
+
+// if (!errors.isEmpty()) {
+//   console.log("errors");
+//   const alert = errors.array();
+//   console.log(alert);
+//   res.render("index", {
+//     title: "Account Login",
+//     page: "account-log-in",
+//     user: req.user,
+//     alert,
+//   });
+// } else {
+// passport.authenticate("local", function (err, user, info) {
+//   console.log("authenticating");
+//   if (err) {
+//     res.render("404", { title: "ERROR", user: req.user });
+//   }
+//   if (!user) {
+//     res.render("index", {
+//       title: "Account Login",
+//       page: "account-log-in",
+//       user: req.user,
+//       alert: info.message,
+//     });
+//   }
+// req.logIn(user, function (err) {
+//   if (err) {
+//     return next(err);
+//   }
+//   return res.redirect("/");
+// });
+// });
+//  }
+//accountController.login(req, res);
+//});
+//);
 
 router.get("/sign-up", (req, res) => {
   res.render("index", {
