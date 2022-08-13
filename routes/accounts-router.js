@@ -20,89 +20,27 @@ router.get("/log-in", function (req, res) {
   });
 });
 
-router.post(
-  "/log-in",
-  passport.authenticate(
-    "local",
-    {
-      successRedirect: "/",
-      failureRedirect: "/account/log-in",
-      //    failureRedirect: "/account/log-in",
-    },
-    (req, res, info) => {
-      console.log(req.session.messages);
+router.post("/log-in", (req, res, next) => {
+  passport.authenticate("local", (err, user, info, status) => {
+    if (err) {
+      return next(err);
     }
-  )
-);
-
-// (req, res, next) => {
-//   console.log(req.session.messages);
-//   res.render("index", {
-//     title: "Account Login",
-//     page: "account-log-in",
-//     user: req.user,
-//   });
-// }
-// );
-
-//   function (err, user, info) {
-//     console.log("authenticating");
-//     if (err) {
-//       res.render("404", { title: "ERROR", user: req.user });
-//     }
-//     if (!user) {
-//       res.render("index", {
-//         title: "Account Login",
-//         page: "account-log-in",
-//         user: req.user,
-//         alert: info.message,
-//       });
-//     }
-//   })
-// );
-// function (req, res) {
-//   check("username", "Email is not valid.").isEmail();
-//   check("password", "Missing password.").exists();
-
-//   console.log("login validation complete");
-
-// const errors = validationResult(req);
-
-// if (!errors.isEmpty()) {
-//   console.log("errors");
-//   const alert = errors.array();
-//   console.log(alert);
-//   res.render("index", {
-//     title: "Account Login",
-//     page: "account-log-in",
-//     user: req.user,
-//     alert,
-//   });
-// } else {
-// passport.authenticate("local", function (err, user, info) {
-//   console.log("authenticating");
-//   if (err) {
-//     res.render("404", { title: "ERROR", user: req.user });
-//   }
-//   if (!user) {
-//     res.render("index", {
-//       title: "Account Login",
-//       page: "account-log-in",
-//       user: req.user,
-//       alert: info.message,
-//     });
-//   }
-// req.logIn(user, function (err) {
-//   if (err) {
-//     return next(err);
-//   }
-//   return res.redirect("/");
-// });
-// });
-//  }
-//accountController.login(req, res);
-//});
-//);
+    if (!user) {
+      return res.render("index", {
+        title: "Account Login",
+        page: "account-log-in",
+        user: req.user,
+        alert: [info.message],
+      });
+    }
+    req.login(user, function (err) {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/");
+    });
+  })(req, res, next);
+});
 
 router.get("/sign-up", (req, res) => {
   res.render("index", {

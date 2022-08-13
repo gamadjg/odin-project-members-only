@@ -79,7 +79,7 @@ passport.use(
           return done(null, user, { message: "Login Successful" });
         } else {
           console.log("Incorrect password.");
-          return done(null, false, { message: "Incorrect password" });
+          return done(null, false, { message: "Invalid Credentials" });
         }
       });
     });

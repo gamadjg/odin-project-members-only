@@ -99,11 +99,10 @@ const updateAccountType = (req, res) => {
         );
       } else {
         res.render("index", {
-          title: "Incorrect Password",
-          page: "error",
+          title: "Update Membership Form",
+          page: "account-membership-update",
           user: req.user,
-          message:
-            "Incorrect password, please return to membership update page and try again.",
+          alert: ["Incorrect password. Please try again."],
         });
       }
       break;
@@ -122,11 +121,10 @@ const updateAccountType = (req, res) => {
         );
       } else {
         res.render("index", {
-          title: "Incorrect Password",
-          page: "error",
+          title: "Update Membership Form",
+          page: "account-membership-update",
           user: req.user,
-          message:
-            "Incorrect password, please return to membership update page and try again.",
+          alert: ["Incorrect password. Please try again."],
         });
       }
       break;
