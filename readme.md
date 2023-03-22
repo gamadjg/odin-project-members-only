@@ -1,30 +1,33 @@
-# Odin Project
+# Members Only
 
-## Full Stack Javascript Path, NodeJS: Members Only
+![image](public/images/members-only.png)
 
-[Project details](https://www.theodinproject.com/lessons/nodejs-members-only)
+## Live Preview
 
-[Live site on Heroku]()
+[Google Cloud Link](https://members-only-381404.wl.r.appspot.com/)
+
+---
+
+## Overview
+
+Messageboard with multi-tierd authentication.
 
 Tech Stack:
 
-- MongoDB
-- ExpressJS
+- Javascript
 - NodeJS
-- Heroku
-- bcrypt
+- Express
+- Bcrypt
+- Passport
+- MongoDB Atlas
+- Google Cloud App Engine
 
-## Goal
+## Features
 
-Setup a messageboard site where users can read/write messages.
-
-## Tasks
-
-- Anonymous users will not be able to see who has posted previous messages.
-- User registration page with email/account validation.
-- Mongodb collection for user info.
-- Mongodb collection for user messages.
-- Login page with forgot password option.
-- Logged in users can see the user identity for previously created messages.
-- Logged in users have an account page which displays their info and allows for password reset.
-- Logged in users can delete or edit their own messages.
+- Bcrypt hashes passwords when signing up or logging in.
+- Passport and Express-validator used for authentication and validation.
+- Separate Mongodb collections for user accounts and messages.
+- Standard and admin membership can be updated when providing a secret key.
+- Anonymous users only able to read messages. All other posters are anonymous to them.
+- Standard registered users can post and see names of other message creators.
+- Admins have the ability to delete messages.

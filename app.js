@@ -1,16 +1,16 @@
 // Env
 require("dotenv").config();
-require("./middleware/authenticator");
 const express = require("express");
+const app = express();
 const session = require("express-session");
 const passport = require("passport");
-// const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
+const dburi = process.env.DBURI;
+const port = process.env.PORT || 8080;
+require("./middleware/authenticator");
+// const LocalStrategy = require("passport-local").Strategy;
 // const Users = require("./models/account-schema");
 // const bcrypt = require("bcryptjs");
-const dburi = process.env.DBURI;
-const port = process.env.PORT;
-const app = express();
 
 // Routing
 // const createError = require("http-errors");
